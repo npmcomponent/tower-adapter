@@ -1,0 +1,17 @@
+{
+  "name": "tower-adapter",
+  "version": "0.0.1",
+  "main": "./lib/index.js",
+  "author": "Lance Pollard <lancejpollard@gmail.com>",
+  "devDependencies": {
+    "chai": "~1.4.2",
+    "mocha": "~1.8.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "emitter-component": "~1.0.0",
+    "tower-container": "*"
+  }
+}
