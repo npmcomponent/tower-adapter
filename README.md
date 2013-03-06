@@ -1,22 +1,22 @@
 # Tower Adapter
 
-[![Build Status](https://secure.travis-ci.org/viatropos/tower-adapter.png)](http://travis-ci.org/viatropos/tower-adapter)
+<!-- [![Build Status](https://secure.travis-ci.org/viatropos/tower-adapter.png)](http://travis-ci.org/viatropos/tower-adapter) -->
 
 ## Installation
 
-For Node.js
+node:
 
 ```
 npm install tower-adapter
 ```
 
-For the browser:
+browser:
 
 ```
 component install tower/adapter
 ```
 
-## Quick Start
+## API
 
 No docs yet, come back later.
 
@@ -71,7 +71,7 @@ MongodbAdapter.prototype.disconnect = function(callback){
 }
 ```
 
-## Run tests
+## Running tests
 
 ```
 mocha
