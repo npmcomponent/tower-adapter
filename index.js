@@ -119,7 +119,7 @@ Adapter.prototype.resource = function(name, options){
  * Must be defined within the context of a `resource`.
  */
 
-Adapter.prototype.attr = function(name, options) {
+Adapter.prototype.attr = function(name, options){
   attr = context = context[name]
     = context[name] || { name: name };
 
@@ -156,7 +156,7 @@ Adapter.prototype.deserialize = function(fn){
   return this.types[arguments[0]].deserialize(arguments[1]);
 }
 
-Adapter.prototype.execute = function() {
+Adapter.prototype.execute = function(){
   throw new Error('Adapter#execute not implemented.');
 }
 
