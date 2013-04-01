@@ -100,7 +100,7 @@ Adapter.prototype.database = function(name){
 }
 
 Adapter.prototype.resource = function(name, options){
-  resource = context = this.resources[name] 
+  resource = context = this.resources[name]
     = this.resources[name] || { name: name, database: database };
 
   if (options) {
@@ -120,7 +120,7 @@ Adapter.prototype.resource = function(name, options){
  */
 
 Adapter.prototype.attr = function(name, options) {
-  attr = context = context[name] 
+  attr = context = context[name]
     = context[name] || { name: name };
 
   return this;
@@ -137,7 +137,7 @@ Adapter.prototype.attr = function(name, options) {
 Adapter.prototype.serialize = function(fn){
   if (1 == arguments.length) {
     context.serialize = fn;
-    return this; 
+    return this;
   }
 
   return this.types[arguments[0]].serialize(arguments[1]);
@@ -150,7 +150,7 @@ Adapter.prototype.serialize = function(fn){
 Adapter.prototype.deserialize = function(fn){
   if (1 == arguments.length) {
     context.deserialize = fn;
-    return this; 
+    return this;
   }
 
   return this.types[arguments[0]].deserialize(arguments[1]);
@@ -179,9 +179,9 @@ Adapter.prototype.self = function(){
  *    adapter('cassandra').collection('users').attr('email').find()
  *    adapter('cassandra').collection('users').index('email').find()
  */
- 
+
 Adapter.prototype.find = Adapter.prototype.execute;
- 
+
 /**
  * Find a column family.
  *
@@ -197,11 +197,11 @@ Adapter.prototype.create = Adapter.prototype.execute;
  */
 
 Adapter.prototype.update = Adapter.prototype.execute;
- 
+
 /**
  * Drop a keyspace or column.
  */
- 
+
 Adapter.prototype.remove = Adapter.prototype.execute;
 
 // alternative apis
@@ -213,8 +213,8 @@ Adapter.prototype.table
   = Adapter.prototype.collection
   = Adapter.prototype.resource;
 
-Adapter.prototype.to 
+Adapter.prototype.to
   = Adapter.prototype.deserialize;
 
-Adapter.prototype.from 
+Adapter.prototype.from
   = Adapter.prototype.serialize;
