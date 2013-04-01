@@ -10,7 +10,7 @@ var Emitter = require('emitter-component')
   , attr
   , database
   , resource
-  , index;i
+  , index;
 
 /**
  * Expose `adapter`.
