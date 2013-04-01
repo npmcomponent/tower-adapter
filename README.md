@@ -1,5 +1,7 @@
 # Tower Adapter
 
+**< 1kb** minified and gzipped.
+
 ## Installation
 
 node.js:
