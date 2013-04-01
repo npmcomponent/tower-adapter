@@ -1,16 +1,8 @@
 {
   "name": "tower-adapter",
   "version": "0.0.1",
-  "devDependencies": {
-    "chai": "~1.4.2",
-    "mocha": "~1.8.1"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
   "dependencies": {
     "emitter-component": "~1.0.0",
-    "tower-container": "*"
   },
-  "main": "./lib/index.js"
+  "main": "./index.js"
 }

@@ -1,10 +1,8 @@
 # Tower Adapter
 
-<!-- [![Build Status](https://secure.travis-ci.org/viatropos/tower-adapter.png)](http://travis-ci.org/viatropos/tower-adapter) -->
-
 ## Installation
 
-node:
+node.js:
 
 ```
 npm install tower-adapter
@@ -23,7 +21,7 @@ No docs yet, come back later.
 ``` javascript
 var adapter = require('tower-adapter');
 
-var MongodbAdapter = adapter('mongodb')
+var mongodb = adapter('mongodb')
   .type('string')
   .type('text')
   .type('date')
@@ -33,42 +31,6 @@ var MongodbAdapter = adapter('mongodb')
   .type('boolean')
   .type('bitmask')
   .type('array');
-
-MongodbAdapter.prototype.find = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.all = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.insert = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.update = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.remove = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.exists = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.count = function(criteria, callback){
-  
-}
-
-MongodbAdapter.prototype.connect = function(callback){
-  
-}
-
-MongodbAdapter.prototype.disconnect = function(callback){
-  
-}
 ```
 
 ## Running tests
