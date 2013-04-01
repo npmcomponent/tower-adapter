@@ -18,11 +18,11 @@ describe('adapter', function(){
     assert.equal('from value!', memory.from('string', 'asdf'));
   });
 
-  it('should define databases', function(){
+  it('should define databases', function(done){
     var memory = adapter('memory');
 
     memory.create = function(fn){
-      console.log('created!');
+      done();
     }
 
     memory.create();

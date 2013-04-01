@@ -65,7 +65,7 @@ Emitter(Adapter.prototype);
  */
 
 Adapter.prototype.connection = function(name, options){
-  if (arguments.length == 1 && 'string' == typeof name) {
+  if (1 == arguments.length && 'string' == typeof name) {
     setting = context = settings[name]
     return this;
   }
