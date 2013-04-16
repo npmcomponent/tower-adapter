@@ -4,12 +4,14 @@
  */
 
 var Emitter = require('emitter-component')
+  , stream = require('tower-stream')
   , context
   , type
   , setting
   , attr
   , database
   , resource
+  , _stream
   , index;
 
 /**
@@ -56,7 +58,7 @@ function Adapter(name) {
  * Mixin `Emitter`.
  */
 
-Emitter(Adapter.prototype);
+//Emitter(Adapter.prototype);
 
 /**
  * Define connection settings.
@@ -107,6 +109,13 @@ Adapter.prototype.resource = function(name, options){
     for (var key in options) resource[key] = options[key];
   }
 
+  return this;
+}
+
+Adapter.prototype.model = Adapter.prototype.resource;
+
+Adapter.prototype.stream = function(name){
+  _stream = context = stream(this.name + '.' + resource.name + '.' + name);
   return this;
 }
 
@@ -167,6 +176,14 @@ Adapter.prototype.execute = function(){
 Adapter.prototype.self = function(){
   resource = type = setting = attr = undefined;
   return context = this;
+}
+
+Adapter.prototype.on = function(name, fn){
+  if (_stream === context) {
+    _stream.on.apply(_stream, arguments);
+  }
+
+  return this;
 }
 
 /**

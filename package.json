@@ -2,7 +2,8 @@
   "name": "tower-adapter",
   "version": "0.0.1",
   "dependencies": {
-    "emitter-component": "~1.0.0"
+    "emitter-component": "~1.0.0",
+    "tower-stream": "*"
   },
   "main": "./index.js"
 }
