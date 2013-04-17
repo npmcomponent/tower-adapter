@@ -19,13 +19,13 @@ var Emitter = require('emitter-component')
  * Expose `adapter`.
  */
 
-module.exports = adapter;
+var exports = module.exports = adapter;
 
 /**
  * Expose `Adapter` constructor.
  */
 
-module.exports.Adapter = Adapter;
+exports.Adapter = Adapter;
 
 /**
  * Lazily get an adapter instance by `name`.
@@ -33,6 +33,16 @@ module.exports.Adapter = Adapter;
 
 function adapter(name) {
   return adapters[name] || (adapters[name] = new Adapter(name));
+}
+
+/**
+ * Check if adapter `name` exists.
+ *
+ * @param {String} name
+ */
+
+exports.exists = function(name) {
+  return !!adapters[name];
 }
 
 /**
