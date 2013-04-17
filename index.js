@@ -131,7 +131,7 @@ Adapter.prototype.model = function(name){
   return model(this.name + '.' + name);
 }
 
-Adapter.prototype.stream = function(name){
+Adapter.prototype.action = function(name){
   return stream(this.name + '.' + resource.name + '.' + name);
 }
 
