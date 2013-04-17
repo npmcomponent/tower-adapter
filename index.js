@@ -5,6 +5,7 @@
 
 var Emitter = require('emitter-component')
   , stream = require('tower-stream')
+  , model = require('tower-model')
   , context
   , type
   , setting
@@ -52,6 +53,8 @@ function Adapter(name) {
   this.settings = {};
   this.resources = {};
   this.connections = {};
+  this.model = this.model.bind(this);
+  this.stream = this.stream.bind(this);
 }
 
 /**
@@ -112,11 +115,14 @@ Adapter.prototype.resource = function(name, options){
   return this;
 }
 
-Adapter.prototype.model = Adapter.prototype.resource;
+// Adapter.prototype.model = Adapter.prototype.resource;
+Adapter.prototype.model = function(name){
+  this.resource(name);
+  return model(this.name + '.' + name);
+}
 
 Adapter.prototype.stream = function(name){
-  _stream = context = stream(this.name + '.' + resource.name + '.' + name);
-  return this;
+  return stream(this.name + '.' + resource.name + '.' + name);
 }
 
 /**

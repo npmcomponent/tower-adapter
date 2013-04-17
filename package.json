@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "emitter-component": "~1.0.0",
-    "tower-stream": "*"
+    "tower-stream": "*",
+    "tower-model": "*"
   },
   "main": "./index.js"
 }
