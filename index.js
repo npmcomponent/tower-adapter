@@ -64,7 +64,7 @@ function Adapter(name) {
   this.resources = {};
   this.connections = {};
   this.model = this.model.bind(this);
-  this.stream = this.stream.bind(this);
+  this.action = this.action.bind(this);
 }
 
 /**
