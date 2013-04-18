@@ -26,5 +26,5 @@ describe('adapter', function(){
     }
 
     memory.create();
-  })
+  });
 });

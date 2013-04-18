@@ -5,13 +5,13 @@
 
 var Emitter = require('emitter-component')
   , stream = require('tower-stream')
-  , model = require('tower-model')
+  , _model = require('tower-model')
   , context
   , type
   , setting
   , attr
   , database
-  , resource
+  , model
   , _stream
   , index;
 
@@ -61,7 +61,7 @@ function Adapter(name) {
   this.databases = {};
   this.types = {};
   this.settings = {};
-  this.resources = {};
+  this.models = {};
   this.connections = {};
   this.model = this.model.bind(this);
   this.action = this.action.bind(this);
@@ -114,25 +114,19 @@ Adapter.prototype.database = function(name){
   return this;
 }
 
-Adapter.prototype.resource = function(name, options){
-  resource = context = this.resources[name]
-    = this.resources[name] || { name: name, database: database };
+Adapter.prototype.model = function(name, options){
+  model = context = this.models[name]
+    = this.models[name] || { name: name, database: database };
 
   if (options) {
-    for (var key in options) resource[key] = options[key];
+    for (var key in options) model[key] = options[key];
   }
 
-  return this;
-}
-
-// Adapter.prototype.model = Adapter.prototype.resource;
-Adapter.prototype.model = function(name){
-  this.resource(name);
-  return model(this.name + '.' + name);
+  return _model(this.name + '.' + name);
 }
 
 Adapter.prototype.action = function(name){
-  return stream(this.name + '.' + resource.name + '.' + name);
+  return stream(this.name + '.' + model.name + '.' + name);
 }
 
 /**
@@ -141,7 +135,7 @@ Adapter.prototype.action = function(name){
  *
  * You can specify `to`, `from`, and `name` (the column name).
  *
- * Must be defined within the context of a `resource`.
+ * Must be defined within the context of a `model`.
  */
 
 Adapter.prototype.attr = function(name, options){
@@ -190,7 +184,7 @@ Adapter.prototype.execute = function(){
  */
 
 Adapter.prototype.self = function(){
-  resource = type = setting = attr = undefined;
+  model = type = setting = attr = undefined;
   return context = this;
 }
 
@@ -244,7 +238,7 @@ Adapter.prototype.keystore
 Adapter.prototype.table
   = Adapter.prototype.columnFamily
   = Adapter.prototype.collection
-  = Adapter.prototype.resource;
+  = Adapter.prototype.model;
 
 Adapter.prototype.to
   = Adapter.prototype.deserialize;
