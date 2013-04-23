@@ -122,7 +122,7 @@ Adapter.prototype.model = function(name, options){
     for (var key in options) model[key] = options[key];
   }
 
-  return (_model || (_model = require('tower-model')))(this.name + '.' + name);
+  return exports.model(this.name + '.' + name);
 }
 
 Adapter.prototype.action = function(name){
