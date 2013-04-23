@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var Emitter = require('emitter-component')
+var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
   , _model = require('tower-model')
   , context

@@ -11,7 +11,9 @@
     "service"
   ],
   "dependencies": {
-    "component/emitter": "*"
+    "tower/emitter": "*",
+    "tower/stream": "*",
+    "tower/model": "*"
   },
   "scripts": ["index.js"],
   "license": "MIT"
