@@ -5,7 +5,7 @@
 
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
-  , _model = require('tower-model')
+  , _model
   , context
   , type
   , setting
@@ -122,7 +122,7 @@ Adapter.prototype.model = function(name, options){
     for (var key in options) model[key] = options[key];
   }
 
-  return _model(this.name + '.' + name);
+  return (_model || (_model = require('tower-model')))(this.name + '.' + name);
 }
 
 Adapter.prototype.action = function(name){
