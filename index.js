@@ -182,8 +182,8 @@ Adapter.prototype.deserialize = function(fn){
   return this.types[arguments[0]].deserialize(arguments[1]);
 }
 
-Adapter.prototype.execute = function(){
-  throw new Error('Adapter#execute not implemented.');
+Adapter.prototype.exec = function(){
+  throw new Error('Adapter#exec not implemented.');
 }
 
 /**
