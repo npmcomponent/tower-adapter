@@ -32,6 +32,8 @@ exports.Adapter = Adapter;
  */
 
 function adapter(name) {
+  // XXX: tmp lazy-load
+  exports.model || (exports.model = require('tower-model'))
   return adapters[name] || (adapters[name] = new Adapter(name));
 }
 
@@ -63,8 +65,9 @@ function Adapter(name) {
   this.settings = {};
   this.models = {};
   this.connections = {};
-  this.model = this.model.bind(this);
-  this.action = this.action.bind(this);
+  //this.model = this.model.bind(this);
+  this.model = exports.model;
+  //this.action = this.action.bind(this);
 }
 
 /**
@@ -114,7 +117,11 @@ Adapter.prototype.database = function(name){
   return this;
 }
 
-Adapter.prototype.model = function(name, options){
+Adapter.prototype.model = function(name){
+  return exports.model()
+}
+
+Adapter.prototype.modelOld = function(name, options){
   model = context = this.models[name]
     = this.models[name] || { name: name, database: database };
 
@@ -125,7 +132,7 @@ Adapter.prototype.model = function(name, options){
   return exports.model(this.name + '.' + name);
 }
 
-Adapter.prototype.action = function(name){
+Adapter.prototype.actionOld = function(name){
   return stream(this.name + '.' + model.name + '.' + name);
 }
 
@@ -245,3 +252,11 @@ Adapter.prototype.to
 
 Adapter.prototype.from
   = Adapter.prototype.serialize;
+
+exports.api = function(name, fn){
+  ['connect', 'disconnect'].forEach(function(method){
+    fn[method] = function(){
+      return fn()[method].apply(adapter(name), arguments);
+    }
+  });
+}
