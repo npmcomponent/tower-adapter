@@ -67,6 +67,8 @@ function Adapter(name) {
   // XXX: refactor, should handle namespacing.
   this.model = exports.model;
   this.action = stream.ns(name);
+  // XXX: todo
+  // this.type = type.ns(name);
 }
 
 /**
