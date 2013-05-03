@@ -12,7 +12,8 @@
   ],
   "dependencies": {
     "tower/emitter": "*",
-    "tower/stream": "*"
+    "tower/stream": "*",
+    "tower/type": "*"
   },
   "scripts": ["index.js"],
   "license": "MIT"

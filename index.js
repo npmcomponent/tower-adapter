@@ -5,8 +5,8 @@
 
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
+  , type = require('tower-type')
   , context
-  , type
   , setting
   , attr
   , database
@@ -159,7 +159,7 @@ Adapter.prototype.exec = function(){
  */
 
 Adapter.prototype.self = function(){
-  model = type = setting = attr = undefined;
+  model = setting = attr = undefined;
   return context = this;
 }
 
