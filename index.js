@@ -5,21 +5,19 @@
 
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
-  , _model
   , context
   , type
   , setting
   , attr
   , database
   , model
-  , _stream
   , index;
 
 /**
  * Expose `adapter`.
  */
 
-var exports = module.exports = adapter;
+exports = module.exports = adapter;
 
 /**
  * Expose `Adapter` constructor.
@@ -34,7 +32,7 @@ exports.Adapter = Adapter;
 function adapter(name) {
   // XXX: tmp lazy-load
   exports.model || (exports.model = require('tower-model'))
-  return adapters[name] || (adapters[name] = new Adapter(name));
+  return exports.collection[name] || (exports.collection[name] = new Adapter(name));
 }
 
 /**
@@ -44,14 +42,14 @@ function adapter(name) {
  */
 
 exports.exists = function(name) {
-  return !!adapters[name];
+  return !!exports.collection[name];
 }
 
 /**
  * All adapters.
  */
 
-var adapters = adapter.instances = {};
+exports.collection = {};
 
 /**
  * Instantiate a new `Adapter`.
@@ -123,22 +121,6 @@ Adapter.prototype.model = function(name){
 }
 
 /**
- * You can specify how a property on the model gets
- * serialized to/from MySQL.
- *
- * You can specify `to`, `from`, and `name` (the column name).
- *
- * Must be defined within the context of a `model`.
- */
-
-Adapter.prototype.attr = function(name, options){
-  attr = context = context[name]
-    = context[name] || { name: name };
-
-  return this;
-}
-
-/**
  * Convert a record into something for the database.
  *
  * You'd only want to use this if your model and your database
@@ -147,7 +129,7 @@ Adapter.prototype.attr = function(name, options){
  */
 
 Adapter.prototype.serialize = function(fn){
-  if (1 == arguments.length) {
+  if (1 === arguments.length) {
     context.serialize = fn;
     return this;
   }
@@ -160,7 +142,7 @@ Adapter.prototype.serialize = function(fn){
  */
 
 Adapter.prototype.deserialize = function(fn){
-  if (1 == arguments.length) {
+  if (1 === arguments.length) {
     context.deserialize = fn;
     return this;
   }
@@ -179,14 +161,6 @@ Adapter.prototype.exec = function(){
 Adapter.prototype.self = function(){
   model = type = setting = attr = undefined;
   return context = this;
-}
-
-Adapter.prototype.on = function(name, fn){
-  if (_stream === context) {
-    _stream.on.apply(_stream, arguments);
-  }
-
-  return this;
 }
 
 /**
