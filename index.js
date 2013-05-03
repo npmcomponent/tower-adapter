@@ -66,8 +66,9 @@ function Adapter(name) {
   this.models = {};
   this.connections = {};
   //this.model = this.model.bind(this);
+  // XXX: refactor, should handle namespacing.
   this.model = exports.model;
-  //this.action = this.action.bind(this);
+  this.action = stream.ns(name);
 }
 
 /**
@@ -119,21 +120,6 @@ Adapter.prototype.database = function(name){
 
 Adapter.prototype.model = function(name){
   return exports.model()
-}
-
-Adapter.prototype.modelOld = function(name, options){
-  model = context = this.models[name]
-    = this.models[name] || { name: name, database: database };
-
-  if (options) {
-    for (var key in options) model[key] = options[key];
-  }
-
-  return exports.model(this.name + '.' + name);
-}
-
-Adapter.prototype.actionOld = function(name){
-  return stream(this.name + '.' + model.name + '.' + name);
 }
 
 /**
