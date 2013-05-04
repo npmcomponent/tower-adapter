@@ -14,12 +14,14 @@ browser:
 $ component install tower/adapter
 ```
 
-## API
+## Examples
+
+See https://github.com/tower/ec2-adapter for the most complete example so far.
 
 ```js
 var adapter = require('tower-adapter');
 
-var mongodb = adapter('mongodb')
+adapter('mongodb')
   .type('string')
   .type('text')
   .type('date')
@@ -29,6 +31,18 @@ var mongodb = adapter('mongodb')
   .type('boolean')
   .type('bitmask')
   .type('array');
+
+adapter('facebook')
+  .model('user')
+    .attr('name')
+    .attr('firstName').from('first_name')
+    .attr('middleName').from('middle_name')
+    .attr('lastName').from('last_name')
+    .attr('gender')
+      .validate('in', [ 'female', 'male' ])
+    .attr('link')
+      .validate('isUrl')
+    .attr('username');
 ```
 
 ## License
