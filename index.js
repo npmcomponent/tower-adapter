@@ -136,10 +136,6 @@ Adapter.prototype.database = function(name){
   return this;
 }
 
-Adapter.prototype.model = function(name){
-  return exports.model()
-}
-
 Adapter.prototype.exec = function(){
   throw new Error('Adapter#exec not implemented.');
 }
