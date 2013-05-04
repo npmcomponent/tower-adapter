@@ -6,7 +6,6 @@
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
   , type = require('tower-type')
-  , context
   , setting
   , attr
   , database
@@ -85,14 +84,14 @@ function Adapter(name) {
 
 Adapter.prototype.connection = function(name, options){
   if (1 == arguments.length && 'string' == typeof name) {
-    setting = context = settings[name]
+    setting = this.context = settings[name]
     return this;
   }
 
   if ('object' == typeof name) options = name;
   options || (options = {});
   options.name || (options.name = name);
-  setting = context = settings[options.name] = options;
+  setting = this.context = settings[options.name] = options;
 
   return this;
 }
@@ -101,55 +100,44 @@ Adapter.prototype.connection = function(name, options){
  * Datatype serialization.
  *
  * @param {String} name
- * @param {Function} [to]
- * @param {Function} [from]
  * @api public
  */
 
-Adapter.prototype.type = function(name, to, from){
-  type = context = this.types[name]
-    = this.types[name] || { deserialize: to, serialize: from };
+Adapter.prototype.type = function(name){
+  this.context =
+    this.types[name] || (this.types[name] = type(this.name + '.' + name));
+  return this;
+}
 
+/**
+ * Delegate to `type`.
+ *
+ * XXX: This may just actually become the `type` object itself.
+ */
+
+Adapter.prototype.serializer = function(name){
+  // `this.types[x] === this.context`
+  this.context.serializer(name);
+  return this;
+}
+
+Adapter.prototype.to = function(fn){
+  this.context.to(fn);
+  return this;
+}
+
+Adapter.prototype.from = function(fn){
+  this.context.from(fn);
   return this;
 }
 
 Adapter.prototype.database = function(name){
-  database = context = this.databases[name] = this.databases[name] || { name: name };
+  database = this.context = this.databases[name] = this.databases[name] || { name: name };
   return this;
 }
 
 Adapter.prototype.model = function(name){
   return exports.model()
-}
-
-/**
- * Convert a record into something for the database.
- *
- * You'd only want to use this if your model and your database
- * are totally different from each other, such as when you're migrating
- * a legacy database to a better schema.
- */
-
-Adapter.prototype.serialize = function(fn){
-  if (1 === arguments.length) {
-    context.serialize = fn;
-    return this;
-  }
-
-  return this.types[arguments[0]].serialize(arguments[1]);
-}
-
-/**
- * Convert a record into a proper model from the database.
- */
-
-Adapter.prototype.deserialize = function(fn){
-  if (1 === arguments.length) {
-    context.deserialize = fn;
-    return this;
-  }
-
-  return this.types[arguments[0]].deserialize(arguments[1]);
 }
 
 Adapter.prototype.exec = function(){
@@ -162,7 +150,7 @@ Adapter.prototype.exec = function(){
 
 Adapter.prototype.self = function(){
   model = setting = attr = undefined;
-  return context = this;
+  return this.context = this;
 }
 
 /**
@@ -208,12 +196,6 @@ Adapter.prototype.table
   = Adapter.prototype.columnFamily
   = Adapter.prototype.collection
   = Adapter.prototype.model;
-
-Adapter.prototype.to
-  = Adapter.prototype.deserialize;
-
-Adapter.prototype.from
-  = Adapter.prototype.serialize;
 
 exports.api = function(name, fn){
   ['connect', 'disconnect'].forEach(function(method){

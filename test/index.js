@@ -14,8 +14,9 @@ describe('adapter', function(){
         .to(function(){})
         .from(function(){});
 
-    assert.equal('to value!', memory.to('string', 'asdf'));
-    assert.equal('from value!', memory.from('string', 'asdf'));
+    var serializer = memory.types['string'].serializers['default'];
+    assert.equal('to value!', serializer.to('asdf'));
+    assert.equal('from value!', serializer.from('asdf'));
   });
 
   it('should define databases', function(done){
