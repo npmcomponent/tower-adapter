@@ -188,6 +188,13 @@ Adapter.prototype.update = Adapter.prototype.execute;
 
 Adapter.prototype.remove = Adapter.prototype.execute;
 
+// XXX: Maybe for managing tables/databases/indexes/etc.
+//      that stuff goes into another adapter, such as
+//      `adapter('mysql.meta')` or `adapter('mysql.schema')`.
+//      This way there's no room for security holes
+//      and the common case (querying records) is kept
+//      separate from managing tables/etc. (so there doesn't)
+//      have to be conditionals everywhere.
 // alternative apis
 Adapter.prototype.keystore
   = Adapter.prototype.database;
