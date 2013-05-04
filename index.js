@@ -162,6 +162,9 @@ Adapter.prototype.self = function(){
  *    adapter('cassandra').collection('users').find()
  *    adapter('cassandra').collection('users').attr('email').find()
  *    adapter('cassandra').collection('users').index('email').find()
+ *
+ *    // that could just delegate:
+ *    query().use('cassandra.schema').where('collection').eq('users')
  */
 
 Adapter.prototype.find = Adapter.prototype.execute;
