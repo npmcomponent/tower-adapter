@@ -64,7 +64,7 @@ function Adapter(name) {
   this.connections = {};
   //this.model = this.model.bind(this);
   // XXX: refactor, should handle namespacing.
-  this.model = exports.model;
+  this.model = exports.model.ns(name);
   this.action = stream.ns(name);
   // XXX: todo
   // this.type = type.ns(name);
