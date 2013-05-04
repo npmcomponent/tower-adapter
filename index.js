@@ -96,12 +96,6 @@ function Adapter(name) {
 }
 
 /**
- * Mixin `Emitter`.
- */
-
-//Emitter(Adapter.prototype);
-
-/**
  * Define connection settings.
  *
  * @api public
