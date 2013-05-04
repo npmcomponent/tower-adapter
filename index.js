@@ -6,12 +6,7 @@
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
   , type = require('tower-type')
-  , load = require('tower-load')
-  , setting
-  , attr
-  , database
-  , model
-  , index;
+  , load = require('tower-load');
 
 /**
  * Expose `adapter`.
@@ -37,10 +32,11 @@ exports.Adapter = Adapter;
  */
 
 function adapter(name) {
-  // XXX: tmp lazy-load
-  exports.model || (exports.model = require('tower-model'))
   if (exports.collection[name]) return exports.collection[name];
   if (exports.load(name)) return exports.collection[name];
+
+  // XXX: tmp lazy-load
+  exports.model || (exports.model = require('tower-model'))
 
   var obj = new Adapter(name);
   exports.collection[name] = obj;
@@ -55,6 +51,10 @@ function adapter(name) {
  */
 
 Emitter(exports);
+
+/**
+ * Lazy-load adapters.
+ */
 
 exports.load = function(name, path){
   return 1 === arguments.length
@@ -72,6 +72,9 @@ exports.exists = function(name) {
   return !!exports.collection[name];
 }
 
+// XXX: remove `exists` in favor of `has`.
+exports.has = exports.exists;
+
 /**
  * Instantiate a new `Adapter`.
  */
@@ -79,9 +82,9 @@ exports.exists = function(name) {
 function Adapter(name) {
   this.name = name;
   this.context = this;
-  this.databases = {};
   this.types = {};
   this.settings = {};
+  // XXX
   this.models = {};
   this.connections = {};
   //this.model = this.model.bind(this);
@@ -153,77 +156,17 @@ Adapter.prototype.from = function(fn){
   return this;
 }
 
-Adapter.prototype.database = function(name){
-  database = this.context = this.databases[name] = this.databases[name] || { name: name };
-  return this;
-}
-
 Adapter.prototype.exec = function(){
   throw new Error('Adapter#exec not implemented.');
 }
 
 /**
- * Reset the context to this.
+ * Reset the context to `this`.
  */
 
 Adapter.prototype.self = function(){
-  model = setting = attr = undefined;
   return this.context = this;
 }
-
-/**
- * Find a keyspace/column family/column/index.
- *
- * Example:
- *
- *    adapter('cassandra').database('main').find()
- *    adapter('cassandra').collection('users').find()
- *    adapter('cassandra').collection('users').attr('email').find()
- *    adapter('cassandra').collection('users').index('email').find()
- *
- *    // that could just delegate:
- *    query().use('cassandra.schema').where('collection').eq('users')
- */
-
-Adapter.prototype.find = Adapter.prototype.execute;
-
-/**
- * Find a column family.
- *
- * Example:
- *
- *    adapter('mysql').table('users').create(function(err, ks) {});
- */
-
-Adapter.prototype.create = Adapter.prototype.execute;
-
-/**
- * Update a column family or column via `ALTER`.
- */
-
-Adapter.prototype.update = Adapter.prototype.execute;
-
-/**
- * Drop a keyspace or column.
- */
-
-Adapter.prototype.remove = Adapter.prototype.execute;
-
-// XXX: Maybe for managing tables/databases/indexes/etc.
-//      that stuff goes into another adapter, such as
-//      `adapter('mysql.meta')` or `adapter('mysql.schema')`.
-//      This way there's no room for security holes
-//      and the common case (querying records) is kept
-//      separate from managing tables/etc. (so there doesn't)
-//      have to be conditionals everywhere.
-// alternative apis
-Adapter.prototype.keystore
-  = Adapter.prototype.database;
-
-Adapter.prototype.table
-  = Adapter.prototype.columnFamily
-  = Adapter.prototype.collection
-  = Adapter.prototype.model;
 
 exports.api = function(name, fn){
   ['connect', 'disconnect'].forEach(function(method){
