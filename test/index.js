@@ -14,6 +14,11 @@ describe('adapter', function(){
         .to(function(){})
         .from(function(){});
 
+    // XXX: should be more like:
+    //      `memory.type('string').serializer`
+    //      or
+    //      `memory.serializer('string')`
+    //      `memory.serializer('string.default')`
     var serializer = memory.types['string'].serializers['default'];
     assert.equal('to value!', serializer.to('asdf'));
     assert.equal('from value!', serializer.from('asdf'));
