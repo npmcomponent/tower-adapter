@@ -1,26 +1,22 @@
 # Tower Adapter
 
-**< 1kb** minified and gzipped.
-
 ## Installation
 
 node.js:
 
 ```
-npm install tower-adapter
+$ npm install tower-adapter
 ```
 
 browser:
 
 ```
-component install tower/adapter
+$ component install tower/adapter
 ```
 
 ## API
 
-No docs yet, come back later.
-
-``` javascript
+```js
 var adapter = require('tower-adapter');
 
 var mongodb = adapter('mongodb')
@@ -33,12 +29,6 @@ var mongodb = adapter('mongodb')
   .type('boolean')
   .type('bitmask')
   .type('array');
-```
-
-## Running tests
-
-```
-mocha
 ```
 
 ## License

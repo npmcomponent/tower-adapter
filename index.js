@@ -6,6 +6,7 @@
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
   , type = require('tower-type')
+  , load = require('tower-load')
   , setting
   , attr
   , database
@@ -17,6 +18,13 @@ var Emitter = require('tower-emitter')
  */
 
 exports = module.exports = adapter;
+
+/**
+ * Expose `collection`.
+ */
+
+exports.collection = [];
+
 
 /**
  * Expose `Adapter` constructor.
@@ -31,7 +39,27 @@ exports.Adapter = Adapter;
 function adapter(name) {
   // XXX: tmp lazy-load
   exports.model || (exports.model = require('tower-model'))
-  return exports.collection[name] || (exports.collection[name] = new Adapter(name));
+  if (exports.collection[name]) return exports.collection[name];
+  if (exports.load(name)) return exports.collection[name];
+
+  var obj = new Adapter(name);
+  exports.collection[name] = obj;
+  // exports.collection.push(obj);
+  exports.emit('define', obj);
+  exports.emit('define ' + name, obj);
+  return obj;
+}
+
+/**
+ * Mixin `Emitter`.
+ */
+
+Emitter(exports);
+
+exports.load = function(name, path){
+  return 1 === arguments.length
+    ? load(exports, name)
+    : load.apply(load, [exports].concat(Array.prototype.slice.call(arguments)));
 }
 
 /**
@@ -43,12 +71,6 @@ function adapter(name) {
 exports.exists = function(name) {
   return !!exports.collection[name];
 }
-
-/**
- * All adapters.
- */
-
-exports.collection = {};
 
 /**
  * Instantiate a new `Adapter`.
