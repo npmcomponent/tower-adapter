@@ -5,6 +5,8 @@
 
 var Emitter = require('tower-emitter')
   , stream = require('tower-stream')
+  , model = require('tower-model')
+  , query = require('tower-query')
   , type = require('tower-type')
   , load = require('tower-load');
 
@@ -93,6 +95,18 @@ function Adapter(name) {
   this.action = stream.ns(name);
   // XXX: todo
   // this.type = type.ns(name);
+
+  // make queryable.
+  // XXX: add to `clear` for both (or something like).
+  query.use(this);
+}
+
+/**
+ * Start a query against this adapter.
+ */
+
+Adapter.prototype.query = function(){
+  return query().use(this);
 }
 
 /**

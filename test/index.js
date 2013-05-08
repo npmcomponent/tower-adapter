@@ -1,4 +1,5 @@
 var adapter = require('..')
+  , query = require('tower-query')
   , assert = require('assert');
 
 describe('adapter', function(){
@@ -24,13 +25,19 @@ describe('adapter', function(){
     assert.equal('from value!', serializer.from('asdf'));
   });
 
-  it('should define databases', function(done){
-    var memory = adapter('memory');
+  it('should be added to query', function(){
+    adapter('memory');
+    assert(1 === query.adapters.length);
+    assert(adapter('memory') === query.adapters['memory']);
+  });
 
-    memory.create = function(fn){
+  it('should have `query` method', function(done){
+    adapter('memory').exec = function(q2, fn){
+      assert(q === q2);
       done();
     }
 
-    memory.create();
+    var q = adapter('memory').query().action('find');
+    q.exec();
   });
 });

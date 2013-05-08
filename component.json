@@ -13,6 +13,8 @@
   "dependencies": {
     "tower/emitter": "*",
     "tower/stream": "*",
+    "tower/query": "*",
+    "tower/model": "*",
     "tower/type": "*",
     "tower/load": "*"
   },
