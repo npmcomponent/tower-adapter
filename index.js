@@ -110,6 +110,14 @@ Adapter.prototype.query = function(){
 }
 
 /**
+ * Use database/connection (config).
+ */
+
+Adapter.prototype.use = function(name){
+  throw new Error('Adapter#use not implemented');
+}
+
+/**
  * Define connection settings.
  *
  * @api public
