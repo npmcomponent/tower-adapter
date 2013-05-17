@@ -1,6 +1,6 @@
-var adapter = require('..')
-  , query = require('tower-query')
-  , assert = require('assert');
+var adapter = require('..');
+var query = require('tower-query');
+var assert = require('assert');
 
 describe('adapter', function(){
   it('should define serializers for data types', function(){
