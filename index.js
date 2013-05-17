@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var Emitter = require('tower-emitter')
-  , stream = require('tower-stream')
-  , model = require('tower-model')
-  , query = require('tower-query')
-  , type = require('tower-type')
-  , load = require('tower-load');
+var Emitter = require('tower-emitter');
+var stream = require('tower-stream');
+var model = require('tower-model');
+var query = require('tower-query');
+var type = require('tower-type');
+var load = require('tower-load');
 
 /**
  * Expose `adapter`.
@@ -62,7 +62,7 @@ exports.load = function(name, path){
   return 1 === arguments.length
     ? load(exports, name)
     : load.apply(load, [exports].concat(Array.prototype.slice.call(arguments)));
-}
+};
 
 /**
  * Check if adapter `name` exists.
@@ -72,7 +72,7 @@ exports.load = function(name, path){
 
 exports.exists = function(name) {
   return !!exports.collection[name];
-}
+};
 
 // XXX: remove `exists` in favor of `has`.
 exports.has = exports.exists;
@@ -107,7 +107,7 @@ function Adapter(name) {
 
 Adapter.prototype.query = function(){
   return query().use(this);
-}
+};
 
 /**
  * Use database/connection (config).
@@ -115,7 +115,7 @@ Adapter.prototype.query = function(){
 
 Adapter.prototype.use = function(name){
   throw new Error('Adapter#use not implemented');
-}
+};
 
 /**
  * Define connection settings.
@@ -124,18 +124,18 @@ Adapter.prototype.use = function(name){
  */
 
 Adapter.prototype.connection = function(name, options){
-  if (1 == arguments.length && 'string' == typeof name) {
+  if (1 === arguments.length && 'string' == typeof name) {
     setting = this.context = settings[name]
     return this;
   }
 
-  if ('object' == typeof name) options = name;
+  if ('object' === typeof name) options = name;
   options || (options = {});
   options.name || (options.name = name);
   setting = this.context = settings[options.name] = options;
 
   return this;
-}
+};
 
 /**
  * Datatype serialization.
@@ -148,7 +148,7 @@ Adapter.prototype.type = function(name){
   this.context =
     this.types[name] || (this.types[name] = type(this.name + '.' + name));
   return this;
-}
+};
 
 /**
  * Delegate to `type`.
@@ -160,21 +160,21 @@ Adapter.prototype.serializer = function(name){
   // `this.types[x] === this.context`
   this.context.serializer(name);
   return this;
-}
+};
 
 Adapter.prototype.to = function(fn){
   this.context.to(fn);
   return this;
-}
+};
 
 Adapter.prototype.from = function(fn){
   this.context.from(fn);
   return this;
-}
+};
 
 Adapter.prototype.exec = function(){
   throw new Error('Adapter#exec not implemented.');
-}
+};
 
 /**
  * Reset the context to `this`.
@@ -182,7 +182,7 @@ Adapter.prototype.exec = function(){
 
 Adapter.prototype.self = function(){
   return this.context = this;
-}
+};
 
 exports.api = function(name, fn){
   ['connect', 'disconnect'].forEach(function(method){
@@ -190,4 +190,4 @@ exports.api = function(name, fn){
       return fn()[method].apply(adapter(name), arguments);
     }
   });
-}
+};
