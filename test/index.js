@@ -1,3 +1,4 @@
+
 var adapter = require('..');
 var query = require('tower-query');
 var assert = require('assert');

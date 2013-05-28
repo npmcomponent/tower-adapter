@@ -22,7 +22,6 @@ exports = module.exports = adapter;
 
 exports.collection = [];
 
-
 /**
  * Expose `Adapter` constructor.
  */
@@ -40,6 +39,7 @@ function adapter(name) {
   var obj = new Adapter(name);
   exports.collection[name] = obj;
   // exports.collection.push(obj);
+  // XXX: if has any event listeners...
   exports.emit('define', obj);
   exports.emit('define ' + name, obj);
   return obj;
@@ -67,7 +67,7 @@ exports.load = function(name, path){
  * @param {String} name
  */
 
-exports.exists = function(name) {
+exports.exists = function(name){
   return !!exports.collection[name];
 };
 
