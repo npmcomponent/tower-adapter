@@ -5,8 +5,8 @@ var assert = require('assert');
 
 describe('adapter', function(){
   it('should define serializers for data types', function(){
-    var to = function() { return 'to value!' }
-    var from = function() { return 'from value!' }
+    function to() { return 'to value!' }
+    function from() { return 'from value!' }
 
     var memory = adapter('memory')
       .type('string')

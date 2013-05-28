@@ -88,7 +88,7 @@ function Adapter(name) {
   this.connections = {};
   //this.resource = this.resource.bind(this);
   // XXX: refactor, should handle namespacing.
-  this.resource = exports.resource.ns(name);
+  this.resource = resource.ns(name);
   this.action = stream.ns(name);
   // XXX: todo
   // this.type = type.ns(name);
