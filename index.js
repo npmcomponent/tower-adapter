@@ -37,9 +37,6 @@ function adapter(name) {
   if (exports.collection[name]) return exports.collection[name];
   if (exports.load(name)) return exports.collection[name];
 
-  // XXX: tmp lazy-load
-  exports.resource || (exports.resource = require('tower-resource'))
-
   var obj = new Adapter(name);
   exports.collection[name] = obj;
   // exports.collection.push(obj);
