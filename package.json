@@ -5,7 +5,7 @@
     "tower-emitter": "*",
     "tower-stream": "*",
     "tower-query": "*",
-    "tower-model": "*",
+    "tower-resource": "*",
     "tower-type": "*",
     "tower-load": "*"
   },

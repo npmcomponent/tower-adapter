@@ -5,7 +5,7 @@
 
 var Emitter = require('tower-emitter');
 var stream = require('tower-stream');
-var model = require('tower-model');
+var resource = require('tower-resource');
 var query = require('tower-query');
 var type = require('tower-type');
 var load = require('tower-load');
@@ -38,7 +38,7 @@ function adapter(name) {
   if (exports.load(name)) return exports.collection[name];
 
   // XXX: tmp lazy-load
-  exports.model || (exports.model = require('tower-model'))
+  exports.resource || (exports.resource = require('tower-resource'))
 
   var obj = new Adapter(name);
   exports.collection[name] = obj;
@@ -87,11 +87,11 @@ function Adapter(name) {
   this.types = {};
   this.settings = {};
   // XXX
-  this.models = {};
+  this.resources = {};
   this.connections = {};
-  //this.model = this.model.bind(this);
+  //this.resource = this.resource.bind(this);
   // XXX: refactor, should handle namespacing.
-  this.model = exports.model.ns(name);
+  this.resource = exports.resource.ns(name);
   this.action = stream.ns(name);
   // XXX: todo
   // this.type = type.ns(name);
@@ -172,7 +172,7 @@ Adapter.prototype.from = function(fn){
   return this;
 };
 
-Adapter.prototype.exec = function(){
+Adapter.prototype.exec = function(query, fn){
   throw new Error('Adapter#exec not implemented.');
 };
 
