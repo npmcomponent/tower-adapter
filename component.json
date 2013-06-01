@@ -18,6 +18,11 @@
     "tower/type": "*",
     "tower/load": "*"
   },
+  "development": {
+    "visionmedia/mocha": "*",
+    "timoxley/assert": "*",
+    "tower/query": "*"
+  },
   "scripts": ["index.js"],
   "license": "MIT"
 }

@@ -1,7 +1,13 @@
 
-var adapter = require('..');
+if ('undefined' === typeof window) {
+  var adapter = require('..');
+  var assert = require('assert');
+} else {
+  var adapter = require('tower-adapter');
+  var assert = require('timoxley-assert');
+}
+
 var query = require('tower-query');
-var assert = require('assert');
 
 describe('adapter', function(){
   it('should define serializers for data types', function(){
