@@ -2,7 +2,7 @@
   "name": "tower-adapter",
   "repo": "component/tower-adapter",
   "description": "Tower Adapter component",
-  "version": "0.5.0pre",
+  "version": "0.1.0pre",
   "keywords": [
     "api",
     "rest",
