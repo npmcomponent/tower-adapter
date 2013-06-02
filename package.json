@@ -1,13 +1,13 @@
 {
   "name": "tower-adapter",
-  "version": "0.0.1",
+  "version": "0.5.0pre",
   "dependencies": {
-    "tower-emitter": "*",
-    "tower-stream": "*",
-    "tower-query": "*",
-    "tower-resource": "*",
-    "tower-type": "*",
-    "tower-load": "*"
+    "tower-emitter": "~0.5.0pre",
+    "tower-stream": "~0.5.0pre",
+    "tower-query": "~0.5.0pre",
+    "tower-resource": "~0.5.0pre",
+    "tower-type": "~0.5.0pre",
+    "tower-load": "~0.5.0pre"
   },
   "main": "./index.js"
 }
