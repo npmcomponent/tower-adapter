@@ -30,6 +30,9 @@ exports.Adapter = Adapter;
 
 /**
  * Lazily get an adapter instance by `name`.
+ *
+ * @param {String} name An adapter name.
+ * @return {Adapter} An adapter.
  */
 
 function adapter(name) {
@@ -53,6 +56,9 @@ Emitter(exports);
 
 /**
  * Lazy-load adapters.
+ *
+ * @param {String} name An adapter name.
+ # @return {Adapter} An adapter.
  */
 
 exports.load = function(name, path){
@@ -64,7 +70,8 @@ exports.load = function(name, path){
 /**
  * Check if adapter `name` exists.
  *
- * @param {String} name
+ * @param {String} name An adapter name.
+ * @return {Boolean} true if adapter exists, otherwise false.
  */
 
 exports.exists = function(name){
@@ -75,7 +82,11 @@ exports.exists = function(name){
 exports.has = exports.exists;
 
 /**
- * Instantiate a new `Adapter`.
+ * Class representing an abstraction over remote services and databases.
+ *
+ * @class
+ *
+ * @param {String} An adapter name.
  */
 
 function Adapter(name) {
@@ -100,6 +111,8 @@ function Adapter(name) {
 
 /**
  * Start a query against this adapter.
+ *
+ * @return {Mixed} Whatever the implementation of the use function attribute returns.
  */
 
 Adapter.prototype.query = function(){
@@ -108,6 +121,8 @@ Adapter.prototype.query = function(){
 
 /**
  * Use database/connection (config).
+ *
+ * @param {String} name An adapter name.
  */
 
 Adapter.prototype.use = function(name){
@@ -116,6 +131,9 @@ Adapter.prototype.use = function(name){
 
 /**
  * Define connection settings.
+ *
+ * @param {String} name An adapter name.
+ * @param {Object} options Adapter options.
  *
  * @api public
  */
@@ -137,7 +155,9 @@ Adapter.prototype.connection = function(name, options){
 /**
  * Datatype serialization.
  *
- * @param {String} name
+ * @chainable
+ * @param {String} name An adapter name.
+ * @return {Adapter} self.
  * @api public
  */
 
@@ -151,6 +171,10 @@ Adapter.prototype.type = function(name){
  * Delegate to `type`.
  *
  * XXX: This may just actually become the `type` object itself.
+ *
+ * @chainable
+ * @param {String} name An adapter name.
+ * @return {Adapter} self.
  */
 
 Adapter.prototype.serializer = function(name){
@@ -175,6 +199,9 @@ Adapter.prototype.exec = function(query, fn){
 
 /**
  * Reset the context to `this`.
+ *
+ * @chainable
+ * @return {Adapter} self.
  */
 
 Adapter.prototype.self = function(){
