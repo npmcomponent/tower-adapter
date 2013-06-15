@@ -33,6 +33,7 @@ exports.Adapter = Adapter;
  *
  * @param {String} name An adapter name.
  * @return {Adapter} An adapter.
+ * @api public
  */
 
 function adapter(name) {
@@ -58,7 +59,8 @@ Emitter(exports);
  * Lazy-load adapters.
  *
  * @param {String} name An adapter name.
- # @return {Adapter} An adapter.
+ * @return {Adapter} An adapter.
+ * @api public
  */
 
 exports.load = function(name, path){
@@ -72,6 +74,7 @@ exports.load = function(name, path){
  *
  * @param {String} name An adapter name.
  * @return {Boolean} true if adapter exists, otherwise false.
+ * @api public
  */
 
 exports.exists = function(name){
@@ -87,6 +90,7 @@ exports.has = exports.exists;
  * @class
  *
  * @param {String} An adapter name.
+ * @api public
  */
 
 function Adapter(name) {
@@ -113,6 +117,7 @@ function Adapter(name) {
  * Start a query against this adapter.
  *
  * @return {Mixed} Whatever the implementation of the use function attribute returns.
+ * @api public
  */
 
 Adapter.prototype.query = function(){
@@ -123,6 +128,7 @@ Adapter.prototype.query = function(){
  * Use database/connection (config).
  *
  * @param {String} name An adapter name.
+ * @api public
  */
 
 Adapter.prototype.use = function(name){
@@ -134,7 +140,6 @@ Adapter.prototype.use = function(name){
  *
  * @param {String} name An adapter name.
  * @param {Object} options Adapter options.
- *
  * @api public
  */
 
@@ -157,7 +162,7 @@ Adapter.prototype.connection = function(name, options){
  *
  * @chainable
  * @param {String} name An adapter name.
- * @return {Adapter} self.
+ * @return {Adapter}
  * @api public
  */
 
@@ -174,7 +179,8 @@ Adapter.prototype.type = function(name){
  *
  * @chainable
  * @param {String} name An adapter name.
- * @return {Adapter} self.
+ * @return {Adapter}
+ * @api public
  */
 
 Adapter.prototype.serializer = function(name){
@@ -183,15 +189,43 @@ Adapter.prototype.serializer = function(name){
   return this;
 };
 
+/**
+ * Set a `to` relationship.
+ *
+ * @chainable
+ * @param {Function} fn Function executed on `to` query.
+ * @return {Adapter}
+ * @api public
+ */
+
 Adapter.prototype.to = function(fn){
   this.context.to(fn);
   return this;
 };
 
+/**
+ * Set a `from` relationship.
+ *
+ * @chainable
+ * @param {Function} fn Function executed on `from` query.
+ * @return {Adapter}
+ * @api public
+ */
+
 Adapter.prototype.from = function(fn){
   this.context.from(fn);
   return this;
 };
+
+/**
+ * Main Adapter function the query object executes which you need to implement on your own adapter.
+ *
+ * @chainable
+ * @param {Query} query A query object.
+ * @param {Function} fn Adapter implementation function.
+ * @return {Adapter}
+ * @api public
+ */
 
 Adapter.prototype.exec = function(query, fn){
   throw new Error('Adapter#exec not implemented.');
@@ -201,7 +235,8 @@ Adapter.prototype.exec = function(query, fn){
  * Reset the context to `this`.
  *
  * @chainable
- * @return {Adapter} self.
+ * @return {Adapter}.
+ * @api public
  */
 
 Adapter.prototype.self = function(){
