@@ -89,7 +89,7 @@ exports.has = exports.exists;
  *
  * @class
  *
- * @param {String} An adapter name.
+ * @param {String} name An adapter name.
  * @api public
  */
 
@@ -235,7 +235,7 @@ Adapter.prototype.exec = function(query, fn){
  * Reset the context to `this`.
  *
  * @chainable
- * @return {Adapter}.
+ * @return {Adapter}
  * @api public
  */
 
