@@ -1,17 +1,18 @@
 {
   "name": "tower-adapter",
   "version": "0.1.0pre2",
+  "keywords": ["orm", "mvc", "database", "model"],
   "dependencies": {
-    "tower-emitter": "~0.1.0pre",
-    "tower-stream": "~0.1.0pre",
-    "tower-query": "~0.1.0pre",
-    "tower-resource": "~0.1.0pre",
-    "tower-type": "~0.1.0pre",
-    "tower-load": "~0.1.0pre"
+    "tower-emitter": "~0.1.0",
+    "tower-stream": "~0.1.0",
+    "tower-query": "~0.1.0",
+    "tower-resource": "~0.1.0",
+    "tower-type": "~0.1.0",
+    "tower-load": "~0.1.0"
   },
   "main": "./index.js",
   "repository": {
     "type" : "git",
-    "url" : "http://github.com/tower/content.git"
+    "url" : "http://github.com/tower/adapter.git"
   }
 }
