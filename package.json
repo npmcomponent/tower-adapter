@@ -1,6 +1,6 @@
 {
   "name": "tower-adapter",
-  "version": "0.1.0pre",
+  "version": "0.1.0pre2",
   "dependencies": {
     "tower-emitter": "~0.1.0pre",
     "tower-stream": "~0.1.0pre",
@@ -9,5 +9,9 @@
     "tower-type": "~0.1.0pre",
     "tower-load": "~0.1.0pre"
   },
-  "main": "./index.js"
+  "main": "./index.js",
+  "repository": {
+    "type" : "git",
+    "url" : "http://github.com/tower/content.git"
+  }
 }
