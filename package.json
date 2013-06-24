@@ -1,6 +1,6 @@
 {
   "name": "tower-adapter",
-  "version": "0.1.0pre2",
+  "version": "0.1.0",
   "keywords": ["orm", "mvc", "database", "model"],
   "dependencies": {
     "tower-emitter": "~0.1.0",
