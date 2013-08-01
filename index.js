@@ -255,15 +255,15 @@ Adapter.prototype.api = function(){
       : self;
   }
 
-  for (var method in methods) {
-    api(fn, method, this);
-  }
+  var i = methods.length;
+  while (i--)
+    api(fn, methods[i], this);
 
   return this._api = fn;
 };
 
 function api(fn, method, adapter) {
   fn[method] = function(){
-    return fn()[method].apply(adapter, arguments);
+    return adapter[method].apply(adapter, arguments);
   }
 }
