@@ -45,8 +45,7 @@ function adapter(name) {
   // exports.collection.push(obj);
   // XXX: if has any event listeners...
   exports.emit('define', obj);
-  exports.emit('define ' + name, obj);
-  return obj;
+  return exports.api(obj);
 }
 
 /**
@@ -243,10 +242,24 @@ Adapter.prototype.self = function(){
   return this.context = this;
 };
 
-exports.api = function(name, fn){
-  ['connect', 'disconnect'].forEach(function(method){
-    fn[method] = function(){
-      return fn()[method].apply(adapter(name), arguments);
-    }
+var methods = [ 'connect', 'disconnect', 'query', 'use', 'type', 'to', 'from' ];
+
+exports.api = function(adapter){
+  function fn(name) {
+    return name
+      ? adapter.query().select(name)
+      : adapter;
+  }
+
+  methods.forEach(function(method){
+    api(fn, method, adapter);
   });
+
+  return fn;
 };
+
+function api(fn, method, adapter) {
+  fn[method] = function(){
+    return fn()[method].apply(adapter, arguments);
+  }
+}
