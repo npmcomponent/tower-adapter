@@ -244,18 +244,22 @@ Adapter.prototype.self = function(){
 
 var methods = [ 'connect', 'disconnect', 'query', 'use', 'type', 'to', 'from' ];
 
-exports.api = function(adapter){
+Adapter.prototype.api = function(){
+  if (this._api) return this._api;
+
+  var self = this;
+
   function fn(name) {
     return name
-      ? adapter.query().select(name)
-      : adapter;
+      ? self.query().select(name)
+      : self;
   }
 
-  methods.forEach(function(method){
-    api(fn, method, adapter);
-  });
+  for (var method in methods) {
+    api(fn, method, this);
+  }
 
-  return fn;
+  return this._api = fn;
 };
 
 function api(fn, method, adapter) {
