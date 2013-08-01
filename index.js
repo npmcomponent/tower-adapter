@@ -45,7 +45,7 @@ function adapter(name) {
   // exports.collection.push(obj);
   // XXX: if has any event listeners...
   exports.emit('define', obj);
-  return exports.api(obj);
+  return obj;
 }
 
 /**
