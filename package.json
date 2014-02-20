@@ -1,18 +1,21 @@
 {
   "name": "tower-adapter",
-  "version": "0.1.0",
-  "keywords": ["orm", "mvc", "database", "model"],
+  "description": "Tower Adapter component",
+  "version": "0.1.2",
+  "keywords": [
+    "api",
+    "rest",
+    "remote api",
+    "database",
+    "service"
+  ],
   "dependencies": {
-    "tower-emitter": "~0.1.0",
-    "tower-stream": "~0.1.0",
-    "tower-query": "~0.1.0",
-    "tower-resource": "~0.1.0",
-    "tower-type": "~0.1.0",
-    "tower-load": "~0.1.0"
+    "tower-emitter": "git://github.com/npmcomponent/tower-emitter.git",
+    "tower-stream": "git://github.com/npmcomponent/tower-stream.git",
+    "tower-query": "git://github.com/npmcomponent/tower-query.git",
+    "tower-resource": "git://github.com/npmcomponent/tower-resource.git",
+    "tower-type": "git://github.com/npmcomponent/tower-type.git",
+    "tower-load": "git://github.com/npmcomponent/tower-load.git"
   },
-  "main": "./index.js",
-  "repository": {
-    "type" : "git",
-    "url" : "http://github.com/tower/adapter.git"
-  }
+  "license": "MIT"
 }

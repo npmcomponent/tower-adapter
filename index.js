@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var Emitter = require('tower-emitter');
-var stream = require('tower-stream');
-var resource = require('tower-resource');
-var query = require('tower-query');
-var type = require('tower-type');
-var load = require('tower-load');
+// commented out by npm-component: var Emitter = require('tower-emitter');
+// commented out by npm-component: var stream = require('tower-stream');
+// commented out by npm-component: var resource = require('tower-resource');
+// commented out by npm-component: var query = require('tower-query');
+// commented out by npm-component: var type = require('tower-type');
+// commented out by npm-component: var load = require('tower-load');
 
 /**
  * Expose `adapter`.
